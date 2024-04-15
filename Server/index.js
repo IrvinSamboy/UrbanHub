@@ -31,7 +31,7 @@ const setUpServer = async () => {
 
 setUpServer()
 
-app.use('/user', AuthRoutes)
+app.use('/api/user', AuthRoutes)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500

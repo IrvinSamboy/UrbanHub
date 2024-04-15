@@ -8,6 +8,12 @@ export default {
     extend: {
       screens: {
         'customMax': {'max': '1280px'}
+      },
+      maxHeight: {
+        'custMaxH': '600px'
+      },
+      gridTemplateColumns: {
+        'custom2': 'repeat(2, 1fr)'
       }
     },
   },

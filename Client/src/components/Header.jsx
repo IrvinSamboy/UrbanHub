@@ -22,18 +22,8 @@ export default function Header() {
             <span className='text-[#2E86AB]'>Urban</span>
             <span className='text-white'>Hub</span>
         </h1>
-        <form className='bg-[#4d4d4d] p-3 rounded-lg hidden sm:flex items-center'>
-            <input
-                type="text"
-                placeholder="Buscar..." 
-                className=' bg-transparent text-white focus:outline-none w-24 sm:w-64'
-            />
-            <FaSearch className='text-white' />
-        </form>
-
+        
         <FaBars className=' z-10 inline xl:hidden text-[white] cursor-pointer' onClick={handleShowMenu} />
-
-
 
         <nav className={`text-[#1E90FF] block absolute xl:static customMax:top-0 customMax:right-0 customMax:bottom-0 customMax:transition-all customMax:bg-[#333333] customMax:w-full z-0 ${showMenu? 'customMax:right-0': 'customMax:right-[-100%]'}`}>
             <ul className='customMax:flex customMax:flex-col customMax:items-center customMax:justify-center customMax:p-4 customMax:h-1/2'>
