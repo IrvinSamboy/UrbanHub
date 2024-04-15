@@ -2,6 +2,7 @@ import UserModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import {errorHandler} from "../utils/error.js";
 
 dotenv.config();
 
@@ -27,11 +28,11 @@ export const singIn = async (req, res, next) => {
         const user = await UserModel.findOne({email: email})
 
         if(!user){
-            next(error(404, "Usuario no encontrado"))
+           return next(errorHandler(404, "Usuario no encontrado"))
         }
         const validity = bcrypt.compareSync(password, user.password)
         if(!validity){
-            next(error(401, "Contraseña incorrecta"))
+           return next(errorHandler(401, "Contraseña incorrecta"))
         }
         const token = jwt.sign({id: user._id}, process.env.SECRET)
         const {password: pass, ...rest} = user._doc
