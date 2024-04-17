@@ -21,7 +21,7 @@ export default function SingIn() {
     return iserror ? error : null;
   };
 
-  const { loading, error, sucess, handleChange, handleSubmit } = useForm(
+  const { loading, error, sucess, handleChange, handleSubmit, ChangePage } = useForm(
     initialForm,
     onValidate,
     "singin"
@@ -83,11 +83,18 @@ export default function SingIn() {
           <div className="w-full flex flex-col justify-center items-center mx-auto mt-3">
             <div className="flex items-center">
               <p className="mr-1.5">¿No tienes una cuenta?</p>
-              <Link to={"/sing-up"}>
+              {loading ? (
                 <span className="text-[#1E90FF] hover:underline hover:text-[#FFA500] cursor-pointerx text-center">
+                Registrate
+                </span>
+              ):
+              (
+                <Link to={"/sing-up"}>
+                <span className="text-[#1E90FF] hover:underline hover:text-[#FFA500] cursor-pointerx text-center" onClick={ChangePage}>
                   Registrate
                 </span>
               </Link>
+              )}
             </div>
           </div>
         </form>

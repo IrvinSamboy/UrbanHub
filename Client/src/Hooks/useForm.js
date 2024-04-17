@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { authStart, singInSucess, authFail, singUpSucess, changePage } from "../redux/user/userSlice";
 const useForm = (initialForm, onValidate, route) => {
   const [formData, setFormData] = useState(initialForm);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [sucess, setSucess] = useState(null);
+  const {loading, error, sucess} = useSelector(state => state.user)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     setFormData({
@@ -17,7 +17,7 @@ const useForm = (initialForm, onValidate, route) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(authStart())
     try {
       const err = onValidate(formData);
       if (err === null) {
@@ -31,31 +31,29 @@ const useForm = (initialForm, onValidate, route) => {
         const data = await res.json();
 
         if (data.sucess === false) {
-          setLoading(false);
-          setError({ message: data.message });
+          dispatch(authFail({ message: data.message }));
           return;
         }
-        setLoading(false);
-        setError(null);
         if(route === 'singin'){
-          setSucess({ message: data.message });
-          console.log(sucess)
+          dispatch(singInSucess(data))
           navigate('/')
         }
         else{
+          dispatch(singUpSucess({message: data.message}))
           navigate('/sing-in')
         }
       } else {
-        setLoading(false);
-        setError(err);
-        setSucess(null);
+        dispatch(authFail(err))
       }
     } catch (error) {
-      setLoading(false);
-      setError({ message: error.message });
+      dispatch(authFail({ message: error.message }))
     }
     
   };
+
+  const ChangePage = () => {
+    dispatch(changePage())
+  }
 
   return {
     loading,
@@ -64,6 +62,7 @@ const useForm = (initialForm, onValidate, route) => {
     sucess,
     handleChange,
     handleSubmit,
+    ChangePage
   };
 };
 

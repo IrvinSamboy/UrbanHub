@@ -29,7 +29,7 @@ export default function SingUp() {
   };
 
 
-  const { loading, error, handleChange, handleSubmit} = useForm(
+  const { loading, error, handleChange, handleSubmit, ChangePage} = useForm(
     initialForm,
     onValidate,
     "singup"
@@ -96,11 +96,18 @@ export default function SingUp() {
           <div className="w-full flex flex-col justify-center items-center mx-auto mt-3">
             <div className="flex items-center">
               <p className="mr-1.5">¿Ya tienes una cuenta?</p>
-              <Link to={"/sing-in"}>
+              {loading ? (
                 <span className="text-[#1E90FF] hover:underline hover:text-[#FFA500] cursor-pointerx text-center">
+                Inicia sesión
+                </span>
+              ):
+              (
+                <Link to={"/sing-in"}>
+                <span className="text-[#1E90FF] hover:underline hover:text-[#FFA500] cursor-pointerx text-center" onClick={ChangePage}>
                   Inicia sesión
                 </span>
               </Link>
+              )}
             </div>
           </div>
         </form>
