@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useForm from "../Hooks/useForm";
+import Oauth from "../components/Oauth";
 
 export default function SingUp() {
   const initialForm = {
@@ -92,6 +93,8 @@ export default function SingUp() {
           >
             {loading ? "Cargando..." : "!Registrarse!"}
           </button>
+
+          <Oauth />
 
           <div className="w-full flex flex-col justify-center items-center mx-auto mt-3">
             <div className="flex items-center">

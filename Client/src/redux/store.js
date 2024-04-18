@@ -9,6 +9,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
+  whitelist: ['currentUserData']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

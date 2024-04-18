@@ -42,3 +42,31 @@ export const singIn = async (req, res, next) => {
         next(error)
     }
 }
+
+export const googleAuth = async (req, res, next) => {
+    const {email, username, photo} = req.body
+    
+    try{
+        const user = await UserModel.findOne({email: email})
+        if(!user){
+            const generatepass = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8)
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassWord = await bcrypt.hash(generatepass, salt)
+            const randomunique = Math.random().toString(36).slice(-8)
+            const usernameunique = username.split(" ").join("").toLowerCase() + randomunique
+            const newUser = new UserModel({username: usernameunique, email, password: hashedPassWord, photo})
+            await newUser.save()
+            const {password: pass, ...rest} = newUser._doc
+            const token = jwt.sign({id: newUser._id}, process.env.SECRET)
+            rest.cookie("toker", token, {httpOnly: true}).status(200).json(rest)
+        }
+        else{
+            const token = jwt.sign({id: user._id}, process.env.SECRET)
+            const {password: pass, ...rest} = user._doc
+            res.cookie("token", token, {httpOnly: true}).status(200).json(rest)
+        }
+    }
+    catch(error){
+        next(error)
+    }
+}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useForm from "../Hooks/useForm";
+import Oauth from "../components/Oauth";
 
 export default function SingIn() {
   const initialForm = {
@@ -74,11 +75,13 @@ export default function SingIn() {
 
           <button
             disabled={loading}
-            className=" block w-10/12 my-0 mx-auto text-white bg-[#5CB85C] p-3 font-semibold rounded-3xl hover:bg-[#57a057] 
+            className="block w-10/12 my-0 mx-auto text-white bg-[#5CB85C] p-3 font-semibold rounded-3xl hover:bg-[#57a057] 
           active:hover:bg-[#4a7c4a]"
           >
             {loading ? "Cargando..." : "!Iniciar sesión!"}
           </button>
+
+          <Oauth />
 
           <div className="w-full flex flex-col justify-center items-center mx-auto mt-3">
             <div className="flex items-center">
