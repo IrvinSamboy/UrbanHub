@@ -34,10 +34,22 @@ const userSlice = createSlice({
             state.error = false
             state.sucess = false
             state.loading = false   
+         },
+         updateSucess: (state, action) => {
+            state.currentUserData = action.payload
+            state.error = false
+            state.sucess = {message: "Datos actualizados correctamente"}
+            state.loading = false
+         },
+         singOutSucess: (state) => {
+            state.currentUserData = null
+            state.error = null
+            state.sucess = null
+            state.loading = false
          }
     }
 });
 
-export const { authStart, singInSucess, authFail, singUpSucess, changePage } = userSlice.actions;
+export const { authStart, singInSucess, authFail, singUpSucess, changePage, updateSucess, singOutSucess } = userSlice.actions;
 
 export default userSlice.reducer;

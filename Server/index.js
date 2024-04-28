@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import AuthRoutes from './routes/AuthRoutes.js';
+import UserRoutes from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
 
 app.use(morgan("dev"))
 
+app.use(cookieParser())
 
 const setUpServer = async () => {
     try{
@@ -31,7 +33,7 @@ const setUpServer = async () => {
 
 setUpServer()
 
-app.use('/api/user', AuthRoutes)
+app.use('/api/user', UserRoutes)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500
