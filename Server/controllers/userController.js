@@ -1,7 +1,7 @@
 import UserModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import {errorHandler} from "../utils/error.js";
-
+import propertiesModel from "../models/propertiesModel.js";
 export const updateUser = async (req, res, next) => {
     if(req.user.id !== req.params.id) return next(errorHandler(403, "Forbidden"))
     try{
@@ -33,5 +33,20 @@ export const singOut = async (req, res, next) => {
     }
     catch(err){
         return next(err)
+    }
+}
+
+export const getUserProperties = async (req, res, next) => {
+    if(req.user.id === req.params.id){
+       try{
+            const properties = await propertiesModel.find({userRef: req.params.id})
+            res.status(200).json(properties)
+       }
+       catch(err){
+           next(err)
+       }   
+    }
+    else{
+        next(errorHandler(403, "Forbidden"))
     }
 }

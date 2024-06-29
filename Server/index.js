@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import UserRoutes from './routes/userRoutes.js';
+import UserRoutes from './routes/UserRoutes.js';
+import PropertiesRoutes from './routes/PropertiesRoutes.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config()
@@ -34,6 +35,7 @@ const setUpServer = async () => {
 setUpServer()
 
 app.use('/api/user', UserRoutes)
+app.use('/api/properties', PropertiesRoutes)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500

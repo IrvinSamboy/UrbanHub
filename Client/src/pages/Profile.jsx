@@ -5,6 +5,7 @@ import ProfileInfo from "../components/ProfileComponents/ProfileInfo";
 export default function Profile() {
   return (
     <>
+     
       <Header />
       <div className="grid grid-cols-60/40 gap-10 max-w-5xl mx-auto py-10">
         <div>
@@ -58,7 +59,7 @@ export default function Profile() {
                 </div>
               </div>
           </div>
-          <div></div>
+
         </div>
       </div>
     </>

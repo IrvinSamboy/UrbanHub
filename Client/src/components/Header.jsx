@@ -4,7 +4,6 @@ import { AiFillMessage } from "react-icons/ai";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux"
-import UserOptions from "./UserOptions";
 import useForm from "../Hooks/useForm";
 
 export default function Header() {
@@ -18,7 +17,7 @@ export default function Header() {
         null,
         "",
         ""
-      );
+    );
 
     const handleShoUserOptions = () => {
         setShowUserOptions(prev => !prev)
@@ -38,11 +37,12 @@ export default function Header() {
         <>
             <header className='bg-black shadow-sm p-4 z-1'>
                 <div className='flex justify-between max-w-5xl my-0 mx-auto items-center'>
-                    <h1 className='font-normal text-2xl sm:text-4xl text-white'>
-                        <span>Urban</span>
-                        <span className='font-black'>Hub</span>
-                    </h1>
-
+                    <Link to={"/"}>
+                        <h1 className='font-normal text-2xl sm:text-4xl text-white'>
+                            <span>Urban</span>
+                            <span className='font-black'>Hub</span>
+                        </h1>
+                    </Link>
                     <FaBars className=' z-20 inline xl:hidden text-white cursor-pointer' onClick={handleShowMenu} />
 
                     <nav className={`font-light text-white block absolute xl:static customMax:top-0 customMax:right-0 customMax:bottom-0 customMax:transition-all customMax:bg-black customMax:w-full z-10 ${showMenu ? 'customMax:right-0' : 'customMax:right-[-100%]'}`}>
@@ -62,21 +62,25 @@ export default function Header() {
                                 </li>
                             </Link>
 
-                            <Link to={"/about"}>
-                                <li
-                                    className='customMax:mr-0 customMax:mb-10 border-b-[4px] border-black hover:border-[#1BAC91] p-2  cursor-pointer
-                    text-rm text-center mr-7'>
-                                    Sobre nosotros
-                                </li>
-                            </Link>
+                            {
+                                /**
+                                <Link to={"/about"}>
+                                        <li
+                                            className='customMax:mr-0 customMax:mb-10 border-b-[4px] border-black hover:border-[#1BAC91] p-2  cursor-pointer
+                            text-rm text-center mr-7'>
+                                            Sobre nosotros
+                                        </li>
+                                </Link>
+                                 */
+                            }
 
                             {
                                 !currentUserData ? (
                                     <>
                                         <Link to={"/sing-in"}>
                                             <li
-                                                className='customMax:mr-0 customMax:mb-10 border-b-[4px] border-black hover:border-[#1BAC91] cursor-pointer
-                            text-rm text-center mr-7'>
+                                                className='customMax:mr-0 customMax:mb-10 border-b-[4px] border-black hover:border-[#1BAC91] p-2  cursor-pointer
+                                                 text-rm text-center mr-7'>
                                                 Iniciar sesión
                                             </li>
                                         </Link>
@@ -90,7 +94,7 @@ export default function Header() {
                                     </>
                                 ) : (
                                     <img src={`${currentUserData.photo}`} alt="" onClick={handleShoUserOptions}
-                                    className="inline w-10 h-10 customMax:h-auto rounded-full object-cover cursor-pointer" />
+                                        className="inline w-10 h-10 customMax:h-auto rounded-full object-cover cursor-pointer" />
                                 )
                             }
 
@@ -101,21 +105,25 @@ export default function Header() {
                 </div>
             </header>
             <div className='relative max-w-5xl mx-auto'>
-                <div className={`${showUserOptions? 'block' : 'hidden'} z-10 absolute left-[85%] bg-black text-white w-[28%] list-none text-center p-4 top-1`}>
+                <div className={`${showUserOptions ? 'block' : 'hidden'} z-10 absolute left-[85%] bg-black text-white w-[28%] list-none text-center p-4 top-1`}>
                     <Link to={"/profile"}>
                         <div className=' flex items-center gap-1 mb-2 justify-center hover:bg-[#1BAC91] cursor-pointer p-2 font-bold'>
                             <FaUser className='text-sm' />
                             <li className=''>Ver perfil</li>
                         </div>
                     </Link>
+                    {
+                        /** 
                     <div className=' flex items-center gap-2 mb-2 justify-center hover:bg-[#1BAC91] cursor-pointer p-2 font-bold'>
-                        <AiFillMessage className='text-sm' />
-                        <li className=''>Ver menesajes</li>
+                    <AiFillMessage className='text-sm' />
+                    <li className=''>Ver menesajes</li>
                     </div>
                     <div className=' flex items-center gap-2 mb-2 justify-center hover:bg-[#1BAC91] cursor-pointer p-2 font-bold'>
                         <FaHeart className='text-sm' />
                         <li className=''>Publicaciones guardadas</li>
                     </div>
+                    **/
+                    }
                     <button onClick={handleSingOut} className='w-full flex items-center gap-2 mb-2 justify-center hover:bg-[#1BAC91] cursor-pointer p-2 font-bold'>
                         <RiLogoutBoxFill className='text-sm' />
                         <p className='' >Cerrar sesión</p>

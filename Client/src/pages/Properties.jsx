@@ -1,12 +1,12 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import ListProperties from "../components/PropertiesComponents/ListProperties"
+import FormProperties from "../components/PropertiesComponents/FormProperties"
 
 export default function Properties() {
   return (
     <div>
       <Header />
-      <ListProperties />
+      <FormProperties />
       <Footer />
     </div>
   )

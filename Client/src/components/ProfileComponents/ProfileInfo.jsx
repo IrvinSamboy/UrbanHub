@@ -22,7 +22,8 @@ export default function ProfileInfo() {
     const [file, setFile] = useState(undefined);
     const [fileProgress, setFileProgress] = useState(0);
     const [fileUploadedError, setFileUploadedError] = useState(false);
-    
+
+
     const initialForm = {
         username: currentUserData.username,
         email: currentUserData.email,
@@ -81,7 +82,6 @@ export default function ProfileInfo() {
     const handleActiveUpdate = () => {
         setActive(prev=>!prev);
     }
-
 
     return (
         <>

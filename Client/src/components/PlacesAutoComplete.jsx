@@ -7,7 +7,7 @@ export default function PlacesComplete() {
     try{
 
       setValue(newvalue)
-
+      console.log(newvalue)
       const results = await geocodeByAddress(newvalue.label)
       const {lat, lng} = await getLatLng(results[0])
       console.log(lat, lng)
@@ -32,7 +32,7 @@ export default function PlacesComplete() {
                 country: ['do'],
                 }
               }}
-              />
+        />
     </div>
   )
 }
